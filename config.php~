@@ -1,0 +1,6 @@
+<?php
+$server="localhost"; /* Nuestro server mysql */
+$database="franarco_www"; /* Nuestra base de datos */
+$dbpass="?BcpTrN1^dox"; /*Nuestro password mysql */
+$dbuser="franarco_www"; /* Nuestro user mysql */
+?>

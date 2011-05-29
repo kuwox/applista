@@ -1,0 +1,60 @@
+<?php
+// modificacion de codigo Xombra (www.xombra.com) 21/03/2009 para sectorweb.net
+include("config.php"); /*Traemos el archivo config*/
+/*Recibimos las variables por el metodo POST*/
+$login = htmlspecialchars(trim($_POST['login']));
+$pass1 = trim($_POST['pass1']);
+$pass2 = trim($_POST['pass2']);
+$nombre= htmlspecialchars(trim($_POST['nombre']));
+$apaterno= htmlspecialchars(trim($_POST['apaterno']));
+$amaterno= htmlspecialchars(trim($_POST['amaterno']));
+$email = htmlspecialchars(trim($_POST['email']));
+/*Hacemos la consulta */
+// $query="SELECT * FROM usuarios WHERE login='$login'"; //ANTES
+
+$link=mysql_connect($server,$dbuser,$dbpass);
+$query = sprintf("SELECT login FROM usuarios WHERE usuarios.login='%s'",  // Ahora
+	   mysql_real_escape_string($login)); 
+$result=mysql_db_query($database,$query,$link);
+if(mysql_num_rows($result)){
+  echo "El usuario ya existe en la BD";
+} else {
+mysql_free_result($result);
+/* Ahora comprovamos que los dos pass coinciden */
+  if($pass1!=$pass2) {
+
+	  echo "Los passwords deben coincidir";
+
+	  echo 'Click <a href="form.html">aquí</a> para volver al formulario';
+
+  } else {
+
+	/* Encriptamos "Ciframos" el password
+
+	// $pass1=crypt($pass2, "semilla"); // ANTES */
+
+	$pass1=sha1(md5($pass1)); // Ahora
+	
+	/* $query="INSERT INTO usuarios (login, nombre, apaterno, amaterno, password, email) VALUES ('$login','$nombre','$apaterno', '$amaterno','$pass1','$email')"; */  // Antes
+  
+	$query  =  sprintf("INSERT INTO usuarios (login, nombre, apaterno, amaterno, password, email) VALUES ('%s','%s','%s', '%s','%s','%s')",  // Ahora
+				mysql_real_escape_string($login),   mysql_real_escape_string($nombre),
+				mysql_real_escape_string($apaterno),mysql_real_escape_string($amaterno), 
+				mysql_real_escape_string($pass1),   mysql_real_escape_string($email));       
+	
+
+	$result=mysql_db_query($database,$query,$link);
+
+	if(mysql_affected_rows()){
+				
+	echo "Usuario introducido correctamente";
+	echo "<h2></strong><br>Pulse para agregar otro usuario: <a href='http://www.franar.com.ve/applista/form.html'>Aqui</a></h2>";
+	} else {
+
+	echo "Error introduciendo el usuario";
+
+	} /* Cierre del else */
+
+  } /* Cierre del else que corresponde a if(mysql_affected_rows.....) */
+} /* Cierre del else que corresponde a if(mysql_num_rows...) */
+?>

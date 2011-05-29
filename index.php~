@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>Sistema de Administración</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<table width="100%" height="100%" border="0">
+  <tr>
+    <td>        
+<h5 align="center">
+  <?php
+if($_REQUEST["acceso"]=="AIUFCHMSEUFCNSMUDFH")
+{
+ 
+$datos=$_POST;
+$nombre=$datos['nombre'];
+$clave=$datos['clave'];
+ 
+$query = "SELECT * FROM date_sistem WHERE  usuario='".$nombre."' AND clave='".$clave."'" ;
+$result = mysql_query($query, $link);
+ 
+   if(mysql_num_rows($result)) {
+		  while($row = mysql_fetch_row($result))
+		  {
+				die ("<script>window.location = 'login.php?user=747524527000245'</script>"); 
+		  }
+   }else {
+   			print ("El usuario y/o la clave no son válidos");
+   }
+mysql_close($link);
+}
+ 
+?>
+</h5><form name="form1" target="_self" method="post" action="index.php?acceso=AIUFCHMSEUFCNSMUDFH">
+<table width="255" height="127" border="0" align="center" cellpadding="1" cellspacing="1" background="images/fondo_login.png">
+                    <tr>
+                      <td class="text">&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="90" class="text">
+                            <p align="right">Usuario:</p>						</td>
+                        <td width="151"><input type="text" name="nombre"></td>
+                    </tr>
+                    <tr>
+                        <td width="90" class="text">
+                            <p align="right">Contraseña:</p>						</td>
+                        <td width="151">
+							<input type="password" name="clave">						</td>
+                    </tr>
+                    <tr>
+                      <td class="text"></td>
+                      <td><input type="submit" name="formbutton1" value="Iniciar Sesi&oacute;n !!"></td>
+                    </tr>
+                    <tr>
+                        <td width="90" class="text"></td>
+                        <td width="151">&nbsp;</td>
+                    </tr>
+  </table>
+</form>	</td>
+  </tr>
+</table>
+ 
+</body>
+</html>

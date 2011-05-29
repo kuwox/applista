@@ -1,0 +1,32 @@
+<?php
+session_start();
+if(!isset($_SESSION["login"])){
+header("location:login.php");
+} else {
+echo "<html><body>";
+echo "<h1>Franar C.A.</h1>";
+echo "Bienvenido al Area de usuarios: <strong>";
+echo $_SESSION["nombre"]." ".$_SESSION["apaterno"]." ";
+echo "</strong><br>Has entrado con el nick: <strong> ";
+echo $_SESSION["login"];
+echo "</strong><br>Para cerrar la sesión, pulsa: <a href='logout.php'>Aqui</a>";
+echo "</body></html>".isset($_SESSION);
+}
+$tipo = $_SESSION["amaterno"];
+
+if ($tipo == "M") {
+	echo "<h2></strong><br>Para descargar la Lista de Mayorista, pulsa: <a href='./dl/LISTAS MAYORISTA  2011 ABR.zip'>Aqui</a></h2>";
+	} else {
+		if ($tipo == "D") {
+	echo "<h2></strong><br>Para descargar la Lista de Distribuidor, pulsa: <a href='./dl/LISTAS DISTRIBUIDOR ABR 2011.zip'>Aqui</a></h2>";
+	} else {
+		if ($tipo == "R") {
+		echo "<h2></strong><br>Para descargar la Lista de Repuestero, pulsa: <a href='./dl/LISTAS REPUESTERO 2011 ABR.zip'>Aqui</a></h2>";		
+	} else {
+		if ($tipo == "S") {
+		echo "<h2></strong><br>Para descargar la Lista de SICO, pulsa: <a href='./dl/LISTAS SICO ABRIL 2011.zip'>Aqui</a></h2>";		
+	}
+	}
+	}
+	}
+?>

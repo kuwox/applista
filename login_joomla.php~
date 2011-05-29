@@ -1,0 +1,37 @@
+<?php
+#nombre: login_joomla.php
+#Descripcion: Autentificacion en joomla:
+#Autor: fitorec (c) <chanerec_at_gmail_dot_com>
+#
+#Requere que se configure la ruta del joomla para extraer la configuracion de la BD
+$joomla_path = './';
+
+require_once($joomla_path.'/'.'configuration.php');
+
+function joomla_login($username, $pass){
+	$jconf = new JConfig;
+
+	$conexion = @mysql_connect($jconf->host,$jconf->user,$jconf->password,false,0);
+	@mysql_select_db($jconf->db);
+	$sql = sprintf("SELECT * FROM %susers  WHERE  %susers.username='%s' LIMIT 1;",
+				$jconf->dbprefix,$jconf->dbprefix, $username);
+	$request = @mysql_query($sql);
+
+	if (mysql_num_rows($request) == 1) {
+		$user = array('User' => mysql_fetch_assoc($request));
+		print_r($user);
+		$parts	= explode( ':', $user['User']['password'] );
+		$crypt	= $parts[0];
+		$salt	= @$parts[1];
+		$testcrypt = md5($pass.$salt);
+		if ($crypt == $testcrypt) {
+			echo "login correct!\n";
+		}
+	}
+	if($request)
+		mysql_free_result($request);
+
+}
+#probamos la función con un usuario que conozcamos 
+joomla_login('admin','linuxjournal');
+?>

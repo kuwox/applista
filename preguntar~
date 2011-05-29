@@ -1,0 +1,4 @@
+Saludos, primeramente muy agradecido por tal trabajo, estoy implementando tu codigo, tal cual lo escribiste en este blog con ese ejemplo y usando la versión de cakephp1.3.3 pero al llamar desde el navegador a la aplicacion me sale el siguiente error:
+#CAKEPHP/APP/app_controller.php class AppController extends Controller { var $components = array('Auth'); } Fatal error: Class 'AppController' not found in /var/www/applista/cake/libs/controller/pages_controller.php on line 32
+
+Por favor si puedes ayudarme.

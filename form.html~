@@ -1,0 +1,21 @@
+<html><body>
+<a href="http://www.franar.com.ve/administrator">aquí</a><strong>Volver</strong>
+<h1>Franar C.A.</h1>
+<h2>http://www.franar.com.ve</h2>
+<h3>Registro de usuarios para descarga de Lista de Precios</h3>
+<form action="crea_usuarios.php" method="POST">
+  Login(nick): <input type="text" name="login"><br>
+Password: <input type="password" name="pass1"><br>
+Repita Password: <input type="password" name="pass2"><br>
+Nombre: <input type="text" name="nombre"><br>
+Empresa: <input type="text" name="apaterno"><br>
+Tipo de Empresa:
+<br>Mayorista: <INPUT type=radio name="amaterno" value="M">
+<br>Distribuidor: <INPUT type=radio name="amaterno" value="D">
+<br>Repuestero: <INPUT type=radio name="amaterno" value="R">
+<br>Sico: <INPUT type=radio name="amaterno" value="S">
+<br>E-mail: <input type="text" name="email"><br>
+<input type="submit" name="Crear">
+
+</form>
+</body></html>
